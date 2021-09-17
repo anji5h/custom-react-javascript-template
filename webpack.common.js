@@ -9,6 +9,7 @@ module.exports = {
     path: path.resolve(__dirname, "build"),
     filename: "bundle.js",
     publicPath: "/",
+    assetModuleFilename: "images/[hash][ext][query]",
   },
   resolve: {
     extensions: [".js", ".jsx"],
@@ -19,14 +20,6 @@ module.exports = {
         test: /\.(js|jsx)$/,
         include: path.join(__dirname, "src"),
         use: "babel-loader",
-      },
-      {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
-      },
-      {
-        test: /\.scss$/,
-        use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
         test: /\.(ico|gif|png|jpg|jpeg|mp3|mp4|ogg)$/,
@@ -46,7 +39,7 @@ module.exports = {
     new CompressionPlugin({
       filename: "[path][base].br",
       algorithm: "brotliCompress",
-      test: /\.(js|css|html|svg)$/,
+      test: /\.(js|jsx|scss|css|html|svg)$/,
       compressionOptions: {
         params: {
           [zlib.constants.BROTLI_PARAM_QUALITY]: 11,

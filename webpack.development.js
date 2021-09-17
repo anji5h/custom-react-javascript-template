@@ -7,6 +7,18 @@ const dotenv = require("dotenv").config({ path: path.join(__dirname, ".env.devel
 module.exports = merge(common, {
   mode: "development",
   devtool: "cheap-module-source-map",
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader", "postcss-loader"],
+      },
+      {
+        test: /\.scss$/,
+        use: ["style-loader", "css-loader", "postcss-loader", "sass-loader"],
+      },
+    ],
+  },
   devServer: {
     static: {
       directory: path.join(__dirname, "public"),
